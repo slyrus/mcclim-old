@@ -4,7 +4,7 @@
 ;;;   Created: 1998-09-29
 ;;;    Author: Gilbert Baumann <unk6@rz.uni-karlsruhe.de>
 ;;;   License: LGPL (See file COPYING for details).
-;;;       $Id: transforms.lisp,v 1.26 2004-03-24 09:30:29 moore Exp $
+;;;       $Id: transforms.lisp,v 1.27 2004-03-31 13:31:20 moore Exp $
 ;;; --------------------------------------------------------------------------------------
 ;;;  (c) copyright 1998,1999,2003 by Gilbert Baumann
 ;;;  (c) copyright 2000 by 
@@ -731,104 +731,3 @@ transformation protocol."))
 (defmethod transformation-equal ((t2 t)
                                  (t1 standard-translation))
   nil)
-
-;; $Log: transforms.lisp,v $
-;; Revision 1.26  2004-03-24 09:30:29  moore
-;;
-;; 2004-03-24  Timothy Moore  <moore@bricoworks.com>
-;;
-;; 	* INSTALL.OPENMCL: updated instructions.
-;;
-;; 	* builtin-commands.lisp (default-translator): Return the
-;; 	presentation type of the presentation as the second value.
-;; 	(document-form-translator): New function
-;; 	(%frob-constant-form, %frob-form): Use document-form-translator. Add
-;; 	translators from standard-object to expression and form.
-;; 	(expression-as-form): Add a menu entry for this translator.
-;; 	(ccl::%read-list-expression, (accept expression t textual-view),
-;; 	read, read-preserving-whitespace): Move the Lisp form reader
-;; 	stuff from the ptype 'form to the ptype 'expression. Disallow any
-;; 	activation or delimiter gestures while reading an expression.
-;;
-;; 	* commands.lisp (command-name-from-symbol): Don't strip leading
-;; 	subsequences of "COM-" from the command name.
-;; 	(keyword-arg-name-from-symbol): New function.
-;; 	(command-parsers): Add argument-unparser slot
-;; 	(make-keyword): New function
-;; 	(make-key-accessors): Use it. Accept keynames that begin with a
-;; 	#\: and have dashes replaced by spaces.
-;; 	(make-unprocessor-fun) New function to create an unprocessor
-;; 	function for each command.
-;; 	(%define-command): New macro preserving  old behavior. Use new
-;; 	unprocessor stuff.
-;; 	(output-destination, invoke-with-standard-output): New class and
-;; 	generic function for outputing the results of commands to an
-;; 	output stream.
-;; 	(define-command): Implement :provide-output-destination-keyword
-;; 	(command-line-unparser): Call new stuff instead.
-;;
-;; 	* dialog.lisp: Add (redundant):provide-output-destination-keyword
-;; 	keyword argument to some commands.
-;;
-;; 	* incremental-redisplay.lisp: Work in progress. Turn things
-;; 	inside-out.
-;;
-;; 	* input-editing.lisp (complete-input): Don't insert input when mode is
-;; 	:complete and we've failed.
-;;
-;; 	* presentation-defs.lisp (accept-1): Use multiple-value-list when
-;; 	looking at results of accept method.
-;; 	((present t completion t t)): Use the arguments to the type to drive
-;; 	the present method here.
-;; 	((accept sequence t textual-view)): Don't peek-char initially! It
-;; 	breaks accepting the first element via mouse click.
-;; 	(accept sequence-enumerated t textual-view): new method.
-;;
-;; 	* recording.lisp : Cosmetic fixups.
-;;
-;; 	* regions.lisp (ellipse-normal-radii*): Add Gilbert's English
-;; 	translation of the comment and clean up the function.
-;;
-;; 	* system.lisp: Add Goatee/presentation-history.
-;;
-;; 	* transforms.lisp (+identity-transformation+): Move earlier in the
-;; 	file to avoid a warning.
-;;
-;; 	* utils.lisp (delete-1, parse-lambda-list): new functions.
-;;
-;; 	* Apps/Listener/dev-commands.lisp : Add
-;; 	:provide-output-destination-keyword argument to many commands.
-;; 	((presentation-type generic-function)): Rewrite. Make it inherit from
-;; 	t, add accept method. The type of the object is generic-function, not
-;; 	the name or something.
-;; 	((presentation-type standard-generic-function), (presentation-type
-;; 	method), (presentation-type standard-method)): add.
-;; 	(Show Generic Function): All-singing all-dancing command for exploring
-;; 	generic functions and their methods.
-;; 	((presentation-type package)): New type with completing accept method.
-;; 	(Set Package): New command
-;;
-;; 	* Apps/Listener/listener.lisp (run-frame-top-level): Add bindings for
-;; 	all the Common Lisp reader and printer variables.
-;;
-;; 	* Apps/Scigraph/dwim/macros.lisp (define-command): Add
-;; 	:provide-output-destination-keyword support for McCLIM.
-;;
-;; 	* Goatee/goatee-command.lisp (lookup-gesture-command): Disable
-;; 	annoying debugging output.
-;;
-;; 	* Lisp-Dep/fix-openmcl.lisp (:clim-mop): In OpenMCL 0.14 use and
-;; 	export all symbols from :openmcl-mop.
-;; 	(compute-applicable-methods-using-classes): Hack for the listener.
-;;
-;; Revision 1.25  2003/11/07 20:22:02  hefner1
-;; Fixed erroneous declaration (declared something as simple-vector inside a
-;; (typep coord-seq 'vector) cond clause.
-;;
-;; Revision 1.24  2003/08/10 07:29:55  gilbert
-;; delete one of the two definitions of MAKE-TRANSLATION-TRANSFORMATION.
-;;
-;; Revision 1.23  2003/08/09 00:55:40  gilbert
-;; Introduced special classes for the identity and translations for both
-;; less consing and less cycles spend.
-;;
