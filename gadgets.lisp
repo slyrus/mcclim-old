@@ -1563,7 +1563,7 @@ and must never be nil."))
 
 (defmethod compose-space ((pane slider-pane) &key width height)
   (declare (ignore width height))
-  (let ((minor (+ 50 (if (gadget-show-value-p pane) 30 0)))
+  (let ((minor (+ 25 (if (gadget-show-value-p pane) 25 0)))
         (major 128))
   (if (eq (gadget-orientation pane) :vertical)
       (make-space-requirement :min-width  minor :width  minor
