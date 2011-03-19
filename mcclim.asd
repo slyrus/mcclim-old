@@ -363,7 +363,8 @@
    (:file "text-editor-gadget")
    (:file "Extensions/tab-layout"
 	  :pathname #.(make-pathname :directory '(:relative "Extensions")
-				     :name "tab-layout"))))
+				     :name "tab-layout"
+                                     :type "lisp"))))
 
 (defsystem :clim-clx
     :depends-on (:clim #+(or sbcl openmcl ecl allegro) :clx)
