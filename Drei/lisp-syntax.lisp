@@ -46,6 +46,13 @@
 (define-syntax-command-table lisp-table
     :errorp nil)
 
+;;; parse trees
+(defclass form* (lisp-nonterminal) ())
+
+(define-parser-state |form* | (lexer-toplevel-state parser-state) ())
+(define-parser-state form-may-follow (lexer-toplevel-state parser-state) ())
+(define-parser-state |initial-state | (form-may-follow) ())
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; the syntax object
@@ -678,13 +685,6 @@ along with any default values) that can be used in a
    form* ->
    form* -> form* form
 |#
-
-;;; parse trees
-(defclass form* (lisp-nonterminal) ())
-
-(define-parser-state |form* | (lexer-toplevel-state parser-state) ())
-(define-parser-state form-may-follow (lexer-toplevel-state parser-state) ())
-(define-parser-state |initial-state | (form-may-follow) ())
 
 (define-new-lisp-state (|initial-state | form) |initial-state |)
 (define-new-lisp-state (|initial-state | comment) |initial-state |)
