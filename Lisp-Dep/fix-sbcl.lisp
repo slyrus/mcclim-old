@@ -34,7 +34,8 @@
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (export '(clim-lisp-patch::defconstant
-            clim-lisp-patch::defclass)
+            clim-lisp-patch::defclass
+            clim-lisp-patch::make-hash-table)
           :clim-lisp-patch))
 
 (defmacro clim-lisp-patch:defconstant (symbol value &optional docu)
@@ -50,3 +51,7 @@
      (eval-when (:compile-toplevel)
        (setf (gethash ',name clim-lisp-patch::*compile-time-clos-names*) t))
      (cl:defclass ,name ,@args)))
+
+(declaim (inline clim-lisp-patch:make-hash-table))
+(defun clim-lisp-patch:make-hash-table (&rest keys)
+  (apply #'cl:make-hash-table :synchronized t keys))
