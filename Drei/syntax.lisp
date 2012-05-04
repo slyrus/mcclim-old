@@ -518,7 +518,7 @@ position in the lexemes of LEXER"
 	do (forward-object scan)))
 
 (defmethod update-lex ((lexer incremental-lexer) start-pos end)
-  (let ((scan (clone-mark (low-mark (buffer lexer)) :left)))
+  (let ((scan (clone-mark (low-border-mark (buffer lexer)) :left)))
     (setf (offset scan)
 	  (end-offset (lexeme lexer (1- start-pos))))
     (loop do (skip-inter-lexeme-objects lexer scan)

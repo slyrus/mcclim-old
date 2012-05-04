@@ -129,7 +129,8 @@ not user-oriented at all."))
            #:tabify-region #:untabify-region
            #:narrowed-mark-mixin #:narrowed-left-sticky-mark #:narrowed-right-sticky-mark
            #:make-narrowed-mark #:make-backward-narrowed-mark #:make-forward-narrowed-mark
-           #:narrow-mark #:unnarrow-mark)
+           #:narrow-mark #:unnarrow-mark
+           #:low-border-mark #:high-border-mark)
   (:documentation "Basic functionality built on top of the buffer
 protocol. Here is where we define slightly higher level
 functions, that can be directly implemented in terms of the
